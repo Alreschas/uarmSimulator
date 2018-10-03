@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="firefighter">
+
+	<xacro:property name="width" value=".2"/>
+
+	<link name="base">
+		<visual>
+			<origin xyz="0.1 -0.1 0 " rpy=" 1.57 0 3.14159"/>
+			<geometry>
+				<mesh filename="daes/base.STL"/>
+			</geometry>
+			<material name="white">
+				<color rgba="0.8 0.8 0.8 0.8"/>
+			</material>
+		</visual>
+
+		<inertial>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+
+		<collision>
+			<origin xyz="0.1 -0.1 0 " rpy=" 1.57 0 3.14159"/>
+			<geometry>
+				<mesh filename="daes/base.STL"/>
+			</geometry>
+		</collision>
+
+	</link>
+
+	<link name="base_rot">
+		<visual>
+			<origin xyz="0.0 0 0 " rpy=" 1.57 0 1.57"/>
+			<geometry>
+				<mesh filename="daes/base_rot.obj"/>
+			</geometry>
+			<material name="Red">
+				<color rgba="0.8 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+
+		<inertial>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0.0 0 0 " rpy=" 1.57 0 1.57"/>
+			<geometry>
+				<mesh filename="daes/base_rot.obj"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<link name="link_1">
+		<visual>
+			<origin xyz="0.0 0 0 " rpy=" 1.57 1.57 0"/>
+			<geometry>
+				<mesh filename="daes/link_1.obj"/>
+			</geometry>
+			<material name="Green">
+				<color rgba="0.0 0.8 0.0 1.0"/>
+			</material>
+		</visual>
+
+		<inertial>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0.0 0 0 " rpy=" 1.57 1.57 0"/>
+			<geometry>
+				<mesh filename="daes/link_1.obj"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<link name="link_2">
+		<visual>
+			<origin xyz="0.1602 0.005 0" rpy="-1.57 1.57 0"/>
+			<geometry>
+				<mesh filename="daes/link_2.obj"/>
+			</geometry>
+			<material name="Blue">
+				<color rgba="0.0 0.0 0.8 1.0"/>
+			</material>
+		</visual>
+
+		<inertial>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0.1602 0.005 0" rpy="-1.57 1.57 0"/>
+			<geometry>
+				<mesh filename="daes/link_2.obj"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<link name="link_3">
+		<visual>
+			<origin xyz="0.0 0 0" rpy=" 1.57 1.57 0"/>
+			<geometry>
+				<mesh filename="daes/link_3_2.obj"/>
+			</geometry>
+			<material name="Yellow">
+				<color rgba="0.8 0.8 0.0 1.0"/>
+			</material>
+		</visual>
+
+		<inertial>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0.0 0 0" rpy=" 1.57 1.57 0"/>
+			<geometry>
+				<mesh filename="daes/link_3_2.obj"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<link name="link_end">
+		<visual>
+			<origin xyz="0.0 0 0" rpy=" 1.57 0 0"/>
+			<geometry>
+				<mesh filename="daes/link_end_2.obj"/>
+			</geometry>
+			<material name="Magenta">
+				<color rgba="0.8 0.0 0.8 1.0"/>
+			</material>
+		</visual>
+
+		<inertial>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<mass value="1"/>
+			<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+		</inertial>
+
+		<collision>
+			<origin xyz="0.0 0 0" rpy=" 1.57 0 0"/>
+			<geometry>
+				<mesh filename="daes/link_end_2.obj"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="base_to_base_rot" type="revolute">
+
+		<axis xyz="0 0 1"/>
+		<limit effort="1000.0" lower="0.0" upper="3.14159" velocity="0"/>
+		<parent link="base"/>
+		<child link="base_rot"/>
+		<origin xyz="0 0 0.032" rpy="0 0 0"/>
+	</joint>
+
+	<joint name="base_rot_to_link_1" type="revolute">
+
+		<axis xyz="0 0 1"/>
+		<limit effort="1000.0" lower="-0.5236" upper="2.356" velocity="0"/>
+		<parent link="base_rot"/>
+		<child link="link_1"/>
+		<origin xyz="0.02117 0 0.07345" rpy="  1.57  0 0"/>
+	</joint>
+
+	<joint name="link_1_to_link_2" type="revolute">
+
+		<axis xyz="0 0 1"/>
+		<limit effort="1000.0" lower="-2.53" upper="2.53" velocity="0"/>
+		<parent link="link_1"/>
+		<child link="link_2"/>
+		<origin xyz="0.14825 0  0 " rpy=" 0 0 0"/>
+	</joint>
+
+	<joint name="link_2_to_link_3" type="revolute">
+
+		<axis xyz="0 0 1"/>
+		<limit effort="1000.0" lower="-2.53" upper="2.53" velocity="0"/>
+		<parent link="link_2"/>
+		<child link="link_3"/>
+		<origin xyz="0.16 0.005 0" rpy=" 0 0 1.57"/>
+	</joint>
+
+	<joint name="link_3_to_link_end" type="revolute">
+
+		<axis xyz="0 0 1"/>
+		<limit effort="1000.0" lower="0.0" upper="3.1416" velocity="0"/>
+		<parent link="link_3"/>
+		<child link="link_end"/>
+		<origin xyz="-0.009 -0.0348 0" rpy=" 0 1.57 0"/>
+	</joint>
+
+</robot>
