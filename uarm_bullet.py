@@ -251,8 +251,18 @@ while(pybullet.isConnected()):
         tgtno += 1
         if(tgtno >= 12):
             tgtno = 0
-    #
-    # img = pybullet.getCameraImage(300, 300)
+
+    width = 300
+    height = 300
+
+    fov = 40
+    aspect = width / height
+    near = 0.02
+    far = 1
+
+    view_matrix = pybullet.computeViewMatrix([0.0, 0.3, 0.5], [0, 0.3, 0], [0, 1, 0])
+    projection_matrix = pybullet.computeProjectionMatrixFOV(fov, aspect, near, far)
+    images = pybullet.getCameraImage(width, height, view_matrix, projection_matrix, renderer=pybullet.ER_BULLET_HARDWARE_OPENGL)
     # img_array = (np.array(img[2])).reshape([300, 300, 4])
     # cv2.imshow('camera capture', img_array.astype(np.uint8))
     # k = cv2.waitKey(3)
