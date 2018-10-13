@@ -146,12 +146,12 @@
       <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
     </inertial>
 
-		<collision>
+		<!-- <collision>
 			<origin xyz="0.0 0 0" rpy=" 1.57 0 0"/>
 			<geometry>
 				<mesh filename="daes/link_end_2.obj"/>
 			</geometry>
-		</collision>
+		</collision> -->
 	</link>
 
 	<joint name="base_to_base_rot" type="revolute">
